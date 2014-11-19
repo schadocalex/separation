@@ -2,28 +2,49 @@
 <html>
 	<head>
 	</head>
-	<body>
-		<svg id="up" style="position:absolute;top:0;left:0;" height="100" viewBox="0 0 356 456" >
+	<body style="background:#000;overflow:hidden;">
+		<svg id="up" style="position:absolute;top:0;left:0;height:1;" viewBox="0 0 356 456" >
 			<path d="
 				M 89 228
 				V 154
 				A 89 89 0 0 1 267 154
 				V 228"
-			 stroke-width="50" fill="none" stroke="#000" />
+			 stroke-width="50" fill="none" stroke="#fff" />
 		</svg>
-		<svg id="down" style="position:absolute;top:0;left:0;stroke:#000" height="100" viewBox="0 0 356 456" >
+		<svg id="down" style="position:absolute;top:0;left:0;height:1;" viewBox="0 0 356 456" >
 			<path d="
 			M 89 416
-			V 228
+			V 253
 			H 267
 			V 416"
-			stroke-width="50" fill="none" stroke="#000" />
+			stroke-width="50" fill="none" stroke="#fff" />
 		</svg>
 		<script type="text/javascript" src="./jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="./TweenMax.min.js"></script>
 		<script>
 			$(document).ready(function() {
-				
+				var w = $(window).width();
+				var h = $(window).height();
+				var up = $('#up');
+				var down = $('#down');
+				var t = $('#up path');
+				var t2 = $('#down path');
+				var letter = [up, down];
+				h = h-h%2;
+
+				up.css('shape-rendering','crispEdges');
+				down.css('shape-rendering','crispEdges');
+				TweenLite.fromTo(letter, 2, {
+					height: 0,
+					autoAlpha: 0,
+					left: 0
+				}, {
+					height: Math.round(h),
+					autoAlpha: 1,
+					left: Math.round((w-0.78*h)/2)
+				});
+				up.css('shape-rendering','auto');
+				down.css('shape-rendering','auto');
 			});
 		</script>
 	</body>
